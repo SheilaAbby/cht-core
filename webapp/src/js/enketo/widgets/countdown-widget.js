@@ -38,13 +38,13 @@ class Timerwidget extends Widget {
 
     const canvas = $('<canvas width="%s" height="%s">'.replace(/%s/g, DIM));
     $label.append(canvas);
-    new TimerAnimation(canvas[0], DIM, DIM, parseInt($el.val()) || DEFAULT_TIME);
+    new TimerAnimation(canvas[0], DIM, DIM, parseInt($el.val()) || DEFAULT_TIME, $el);
   }
 }
 
 module.exports = Timerwidget;
 
-const TimerAnimation = function(canvas, canvasW, canvasH, duration) {
+const TimerAnimation = function(canvas, canvasW, canvasH, duration, $el) {
   const pi = Math.PI;
   const LIM = duration * 500; // Half of the time the animation should take in milliseconds
   const ctx = canvas.getContext('2d');
@@ -65,6 +65,11 @@ const TimerAnimation = function(canvas, canvasW, canvasH, duration) {
     const cached = new Audio('/audio/alert.mp3');
     return { play: () => cached.play() };
   }());
+  
+  const setTimerCompleted = () => {
+    const timerCompleted = 'true';
+    $el.val(timerCompleted).trigger('change');
+  };
 
   //> UTILS
   const drawCircle = (ctx, c) => {
@@ -119,6 +124,7 @@ const TimerAnimation = function(canvas, canvasW, canvasH, duration) {
     } else {
       drawBackgroundCircle(inactiveBgColor);
       running = false;
+      setTimerCompleted();
       if ($(canvas).closest('body').length > 0) {
         // only beep if the canvas is still attached to the DOM
         audio.play();
