@@ -38,35 +38,13 @@ class Timerwidget extends Widget {
 
     const canvas = $('<canvas width="%s" height="%s">'.replace(/%s/g, DIM));
     $label.append(canvas);
-
-     // Find the 2 text input fields with the class 'or-appearance-countdown-timer'
-    const $countDownTimers = $el.closest('form').find('.or-appearance-countdown-timer');
-   
-    if($countDownTimers.length >=2) {
-
-      const $firstCountDownTimer = $($countDownTimers[0]).find('input');
-
-      const $secondCountDownTimer =$($countDownTimers[1]).find('input'); 
-
-      // Pass the value to the TimerAnimation constructor
-      new TimerAnimation(
-        canvas[0],
-        DIM,
-        DIM,
-        parseInt($el.val()) || DEFAULT_TIME, 
-        $firstCountDownTimer,
-        $secondCountDownTimer,
-        this.element // Pass the current input element
-        );
-    }
+    new TimerAnimation(canvas[0], DIM, DIM, parseInt($el.val()) || DEFAULT_TIME, $el);
   }
 }
 
 module.exports = Timerwidget;
 
-const TimerAnimation = function(canvas,
-   canvasW, canvasH, duration,
-   $firstCountDownTimer, $secondCountDownTimer, currentInput) {
+const TimerAnimation = function(canvas, canvasW, canvasH, duration, $el) {
   const pi = Math.PI;
   const LIM = duration * 500; // Half of the time the animation should take in milliseconds
   const ctx = canvas.getContext('2d');
@@ -82,26 +60,15 @@ const TimerAnimation = function(canvas,
     const androidSoundSupport = window.medicmobile_android &&
       typeof window.medicmobile_android.playAlert === 'function';
     if (androidSoundSupport) {
-      return { play: () => { window.medicmobile_android.playAlert(); setTimerCompleted(); } };
+      return { play: () => window.medicmobile_android.playAlert() };
     }
     const cached = new Audio('/audio/alert.mp3');
-    return { play: () => { cached.play(); setTimerCompleted(); } };
+    return { play: () => cached.play() };
   }());
   
-  // 'setTimerCompleted' to update the 2 fields' value
   const setTimerCompleted = () => {
-
-    const newValue = 'TRUE';
-
-     if (currentInput === $firstCountDownTimer[0]) {
-      $firstCountDownTimer.val(newValue);
-      $firstCountDownTimer.trigger('change');
-    }
-
-    if (currentInput === $secondCountDownTimer[0]) {
-      $secondCountDownTimer.val(newValue);
-      $secondCountDownTimer.trigger('change');
-    }
+    const timerCompleted = 'true';
+    $el.val(timerCompleted).trigger('change');
   };
 
   //> UTILS
@@ -157,6 +124,7 @@ const TimerAnimation = function(canvas,
     } else {
       drawBackgroundCircle(inactiveBgColor);
       running = false;
+      setTimerCompleted();
       if ($(canvas).closest('body').length > 0) {
         // only beep if the canvas is still attached to the DOM
         audio.play();
