@@ -1,0 +1,19 @@
+<root xmlns="http://www.w3.org/2002/xforms" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <model>
+    <instance>
+      <enketo_widgets xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" delimiter="#" id="enketo_widgets" prefix="J1!enketo_widgets!" version="2024-02-09 00:00:00">
+        <test_attributes>
+          <my_note cht="{'duration': '10'}"/>
+          <my_trigger cht="{'duration': '5'}"/>
+          <my_date cht="{'message': '2024/02/09'}"/>
+          <my_select cht="{'link': 'https://docs.communityhealthtoolkit.org/#why-work-with-the-cht'}"/>
+        </test_attributes>
+        <my_text cht="{'duration': '42', 'message': 'Hello World!', 'link': 'https://google.com'}"/>
+        <meta tag="hidden">
+          <instanceID/>
+        </meta>
+      </enketo_widgets>
+    </instance>
+    <instance id="contact-summary"/>
+  </model>
+</root>
