@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:cht="https://docs.communityhealthtoolkit.org/" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <h:head>
-    <h:title>Custom CHT Attributes</h:title>
+    <h:title>Custom Attributes</h:title>
     <model>
       <itext>
         <translation lang="en">
@@ -35,14 +35,14 @@
         </translation>
       </itext>
       <instance>
-        <custom_attributes delimiter="#" id="custom_attributes" prefix="J1!custom_attributes!" version="2024-02-09 00:00:00">
+        <custom_attributes delimiter="#" id="custom_attributes" prefix="J1!custom_attributes!" version="2024-02-23 00:00:00">
           <test_attributes>
-            <my_note cht="{'duration': '10'}"/>
-            <my_trigger cht="{'duration': '5'}"/>
-            <my_date cht="{'message': '2024/02/09'}"/>
-            <my_select cht="{'link': 'https://docs.communityhealthtoolkit.org/#why-work-with-the-cht'}"/>
+            <my_note cht:duration="10"/>
+            <my_trigger cht:duration="5"/>
+            <my_date cht:message="2024/02/09"/>
+            <my_select cht:link="https://docs.communityhealthtoolkit.org/#why-work-with-the-cht"/>
           </test_attributes>
-          <my_text cht="{'message': 'Hello World!', 'duration': '42', 'link': 'https://google.com'}"/>
+          <my_text cht:duration="42" cht:link="https://google.com" cht:message="Hello World!"/>
           <meta tag="hidden">
             <instanceID/>
           </meta>
